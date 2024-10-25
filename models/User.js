@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const validator = require("validator"); 
 const userSchema = new mongoose.Schema(
   {
     firstName: {
@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema(
     skills: {
       type: [String],
     },
-    
+
   },
   {
     timestamps: true,
