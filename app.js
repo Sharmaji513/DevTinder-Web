@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/auth');
+const profileRouter = require('./routes/profile');
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/v1' , authRouter)
+app.use('/api/v1' , profileRouter)
 
 
 app.get("/", (req, res) => {
