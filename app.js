@@ -1,14 +1,14 @@
-const express = require('express');
-const connectDB = require('./config/db');
-const dotenv = require('dotenv');
-const authRouter = require('./routes/auth');
-const profileRouter = require('./routes/profile');
+require("dotenv").config(); 
+const express = require("express");
+const connectDB = require("./config/db");
+const authRouter = require("./routes/authRouter");
+const profileRouter = require("./routes/profileRouter");
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const cookieParser = require("cookie-parser");
 
 
 
@@ -24,18 +24,14 @@ connectDB()
     console.error("Database cannot be connected!!");
   });
 
-
-
 // Middleware
 app.use(express.json());
-
+app.use(cookieParser());
 
 //Routes
-app.use('/api/v1' , authRouter)
-app.use('/api/v1' , profileRouter)
-
+app.use("/api/v1", authRouter);
+app.use("/api/v1", profileRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello Dev");
+  res.send("Coming Soon Home");
 });
-
