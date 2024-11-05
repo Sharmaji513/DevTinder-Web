@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const cookieParser = require("cookie-parser");
+const requestRouter = require("./routes/requestRouter");
 
 
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 //Routes
 app.use("/api/v1", authRouter);
 app.use("/api/v1", profileRouter);
+app.use("/api/v1", requestRouter);
 
 app.get("/", (req, res) => {
   res.send("Coming Soon Home");
