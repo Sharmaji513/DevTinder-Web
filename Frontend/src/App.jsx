@@ -1,5 +1,6 @@
 
 import './App.css'
+import NavBar from './components/Navbar/NavBar'
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <>
      <div >
-      <h1 className='text-white'>DevTinder..</h1>
+    <NavBar/>
      </div>
     </>
   )
