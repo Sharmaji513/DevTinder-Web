@@ -1,8 +1,16 @@
 import React from 'react'
+import Sidebar from '../Sidebar/Sidebar'
 
 const Feed = () => {
   return (
-    <div>Feed</div>
+    <div className='flex gap-[30vw]'>
+      <div >
+        <Sidebar/>
+      </div>
+      
+      Feed
+      
+    </div>
   )
 }
 
