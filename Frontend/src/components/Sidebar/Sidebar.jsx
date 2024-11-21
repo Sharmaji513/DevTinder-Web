@@ -29,16 +29,16 @@ const Sidebar = () => {
         <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-10 gap-10 text-2xl ">
         
           <li>
-            <Link><TbCardsFilled />Explore</Link>
+            <Link to='/feed'><TbCardsFilled />Explore</Link>
           </li>
           <li>
-            <a><FaUsers/>Connections</a>
+            <Link  to="/connections" ><FaUsers/>Connections</Link>
           </li>
           <li>
-            <a><FaBell />Notifications</a>
+            <Link to="/requests"><FaBell />Notifications</Link>
           </li>
           <li>
-            <Link><FaEye />Views</Link>
+            <Link to='/view'><FaEye />Views</Link>
           </li>
           <li>
             <Link to='/profile'><FaUserEdit />Profile</Link>
@@ -46,6 +46,7 @@ const Sidebar = () => {
 
         </ul>
       </div>
+    
     </div>
   );
 };

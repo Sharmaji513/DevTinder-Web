@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "../Profile/Profile";
+import Profile from "../../pages/Edit Profile/Profile";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
