@@ -6,9 +6,10 @@ import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("elon@gmail.com");
-  const [password, setPassword] = useState("Elon@123456");
+  const [emailId, setEmailId] = useState("dhoni@gmail.com");
+  const [password, setPassword] = useState("Dhoni@123456");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage , setErrorMessage] = useState(false)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Login = () => {
       dispatch(addUser(res.data));
       return navigate("/feed");
     } catch (err) {
+      setErrorMessage(err?.response?.data?.message  || "Something went wrong!")
       console.error(err);
     }
   };
@@ -73,6 +75,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+                <p className="text-red-500">{errorMessage}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">

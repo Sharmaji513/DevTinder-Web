@@ -25,7 +25,7 @@ const NavBar = () => {
   console.log(user);
 
   return (
-    <div className="navbar bg-base-200 px-8  ">
+    <div className="navbar bg-base-200 px-8 fixed z-10  ">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           <span className="text-2xl">🦸🏻</span>devTinder
