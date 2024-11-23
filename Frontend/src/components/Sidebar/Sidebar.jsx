@@ -15,18 +15,18 @@ const Sidebar = () => {
     <div class="drawer-content flex flex-col items-center justify-center">
       <label
         for="my-drawer-2"
-        class="btn btn-primary drawer-button "
+        class="btn btn-primary drawer-button hidden"
       >
         <GiHamburgerMenu />
       </label>
     </div>
-    <div class="drawer-side">
+    <div class="drawer-side ">
       <label
         for="my-drawer-2"
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <ul class="menu bg-base-200 text-base-content h-full w-80 p-10 gap-10 text-2xl">
+      <ul class="menu bg-base-300 text-base-content h-full w-80 p-10 gap-10 text-2xl">
         <li>
           <Link to="/feed"><TbCardsFilled /> Explore</Link>
         </li>

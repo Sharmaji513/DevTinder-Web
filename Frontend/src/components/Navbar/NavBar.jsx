@@ -25,17 +25,17 @@ const NavBar = () => {
   console.log(user);
 
   return (
-    <div className="navbar bg-base-200 px-8 fixed z-10  ">
+    <div className="navbar bg-base-300 px-8 fixed z-10  ">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
-          <span className="text-2xl">🦸🏻</span>devTinder
+          <span className="text-2xl">🦸🏻</span>DevTinder
         </Link>
       </div>
 
       <div className="navbar-end">
         {!user && (
           <Link to="/login">
-            <button className="btn">Login</button>
+            <button className="btn hover:text-blue-500">Login</button>
           </Link>
         )}
 
@@ -45,7 +45,7 @@ const NavBar = () => {
           </div>
         )}
       </div>
-      <div className="flex-none gap-2">
+      <div className="flex-none gap-2 px-2">
         {user && (
           <div className="dropdown dropdown-end">
             <div
