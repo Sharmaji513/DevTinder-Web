@@ -9,7 +9,7 @@ const UserCard = ({ user }) => {
       <div className="card w-screen  bottom-0 md:w-[25vw] h-screen md:h-[38vw]  rounded-2xl shadow-2xl relative overflow-hidden bg-base-300 ">
         <figure className="relative h-screen w-screen md:w-full md:h-full  ">
           <img
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover object-center opacity-90  "
             src={photoUrl}
             alt="MS Dhoni"
           />

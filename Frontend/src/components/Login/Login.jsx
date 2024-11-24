@@ -6,115 +6,196 @@ import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
   const [emailId, setEmailId] = useState("dhoni@gmail.com");
   const [password, setPassword] = useState("Dhoni@123456");
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage , setErrorMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoginForm, setIsLoginForm] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogin = async () => {
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      const res = await axios.post(BASE_URL + "user/login", { emailId, password },{ withCredentials: true });
+      const res = await axios.post(
+        `${BASE_URL}/user/login`,
+        { emailId, password },
+        { withCredentials: true }
+      );
       dispatch(addUser(res.data));
-      return navigate("/feed");
+      navigate("/feed");
     } catch (err) {
-      setErrorMessage(err?.response?.data?.message  || "Something went wrong!")
+      setErrorMessage(err?.response?.data?.message || "Something went wrong!");
       console.error(err);
     }
   };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/user/signup`,
+        { emailId, password, firstName, lastName, age, gender },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data));
+      navigate("/feed");
+    } catch (err) {
+      setErrorMessage(err?.response?.data?.message || "Something went wrong!");
+      console.error(err);
+    }
+  };
+
   return (
-    <>
-      <section
-        className="bg-cover bg-center bg-no-repeat h-screen"
-        style={{
-          backgroundImage:
-            "url('https://match.com/reg/_next/static/assets/en-desktop-landing-2a78516e8c0aed13202930721f552d8a.jpg')", // Replace with your background image URL
-        }}
-      >
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 bg-opacity-50 bg-gray-900">
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Log in
-              </h1>
-              <div className="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="name@company.com"
-                    required
-                    value={emailId}
-                    onChange={(e) => setEmailId(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <p className="text-red-500">{errorMessage}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        onChange={() => setShowPassword(!showPassword)}
-                        type="checkbox"
-                        id="show-password"
-                        aria-describedby="remember"
-                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="remember"
-                        className="text-gray-500 dark:text-gray-300"
-                      >
-                        Show Password
-                      </label>
-                    </div>
+    <div className="flex flex-wrap">
+      <div className="flex w-full flex-col md:w-1/2 bg-base-200">
+        <div className="lg:w-[28rem] mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-16 mt-6">
+          <div>
+            {isLoginForm ? (
+              <p className="text-left text-3xl font-bold">Welcome 🙏, DevTinder</p>
+            ) : (
+              <p className="text-left text-3xl font-bold">Register</p>
+            )}
+          </div>
+
+          <p className="mt-2 text-left text-gray-500">
+            Welcome back, please enter your details.
+          </p>
+
+          <div className="flex flex-col pt-3 md:pt-8">
+            {/* SignUp Form */}
+            {!isLoginForm && (
+              <>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {/* First Name */}
+                  <div>
+                    <label>First Name</label>
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Your Name"
+                      className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                    />
+                  </div>
+                  {/* Last Name */}
+                  <div>
+                    <label>Last Name</label>
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="Last Name"
+                      className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                    />
+                  </div>
+
+                  {/* Gender */}
+                  <div>
+                    <label>Gender</label>
+                    <select
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                      className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+
+                    </select>
+                  </div>
+
+                  {/* Age */}
+                  <div>
+                    <label>Age</label>
+                    <input
+                      type="text"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                      placeholder="Enter your age"
+                      className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                    />
                   </div>
                 </div>
-                <button className="btn btn-primary" onClick={handleLogin}>
-                  Login
-                </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet?
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                  >
-                    Sign up
-                  </a>
-                </p>
+              </>
+            )}
+
+            {/* Login form */}
+            <div>
+              <div className="flex flex-col pt-4">
+                <label>Email</label>
+                <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
+                  <input
+                    type="email"
+                    value={emailId}
+                    onChange={(e) => setEmailId(e.target.value)}
+                    id="login-email"
+                    className="w-full flex-1 appearance-none border-gray-300 bg-base-100 px-4 py-2 text-base text-white placeholder-gray-400 focus:outline-none"
+                    placeholder="Email"
+                  />
+                </div>
               </div>
+              <div className="mb-12 flex flex-col pt-4">
+                <label>Password</label>
+                <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    id="login-password"
+                    className="w-full flex-1 appearance-none border-gray-300 bg-base-100 px-4 py-2 text-base text-white placeholder-gray-400 focus:outline-none"
+                    placeholder="Password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 text-gray-500"
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </div>
+              {errorMessage && (
+                <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
+              )}
             </div>
+
+            <button
+              onClick={isLoginForm ? handleLogin : handleSignUp}
+              className="w-full rounded-lg bg-blue-700 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
+            >
+              {isLoginForm ? "Login" : "Sign Up"}
+            </button>
+          </div>
+
+          <div className="py-12 text-center">
+            <p className="whitespace-nowrap text-gray-500">
+              {isLoginForm ? "Don't have an account? " : "Existing User? "}
+              <span
+                className="underline-offset-4 md:mx-2 font-semibold text-gray-200 underline cursor-pointer"
+                onClick={() => setIsLoginForm(!isLoginForm)}
+              >
+                {isLoginForm ? "Sign up for free." : "Login Here"}
+              </span>
+            </p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Right Side image */}
+      <div className="pointer-events-none relative hidden h-screen select-none md:block md:w-1/2">
+        <img
+          className="-z-1 absolute top-2 h-full w-full object-cover object-center opacity-90"
+          src={isLoginForm ? "https://i.pinimg.com/originals/06/aa/40/06aa408f09f394c3b46d6cbe1efad944.gif" : "https://i.pinimg.com/originals/a4/07/22/a4072206392b57e4b3ede6588e81d7f3.gif"}
+          alt="Background"
+        />
+      </div>
+    </div>
   );
 };
 

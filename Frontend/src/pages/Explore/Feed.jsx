@@ -33,7 +33,7 @@ const Feed = () => {
       <Sidebar/>
     </div> {
      feed && <div className="mt-5">
-        <UserCard user={feed[0]} />
+        <UserCard user={feed[3]} />
       </div>
 
     }
