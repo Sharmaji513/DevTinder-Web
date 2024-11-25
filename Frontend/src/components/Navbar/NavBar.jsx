@@ -41,7 +41,7 @@ const NavBar = () => {
 
         {user && (
           <div className="form-control">
-            Welcome , {user?.firstName.toUpperCase()}
+            Welcome , {user?.firstName}
           </div>
         )}
       </div>

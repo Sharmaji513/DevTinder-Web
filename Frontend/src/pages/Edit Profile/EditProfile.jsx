@@ -109,8 +109,9 @@ const EditProfile = ({ user }) => {
                       className="mt-2 h-12 w-full rounded-md bg-base-100 px-3"
                     >
                       
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
                     </select>
                  
                 <label className="form-control w-full max-w-xs my-2">

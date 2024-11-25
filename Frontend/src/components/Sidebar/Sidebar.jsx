@@ -10,23 +10,23 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Sidebar = () => {
   return (
-    <div class="drawer lg:drawer-open gap-20 fixed inset-0 mt-16">
-    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col items-center justify-center">
+    <div className="drawer lg:drawer-open gap-20 fixed inset-0 mt-16">
+    <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+    <div className="drawer-content flex flex-col items-center justify-center">
       <label
         for="my-drawer-2"
-        class="btn btn-primary drawer-button hidden"
+        className="btn btn-primary drawer-button hidden"
       >
         <GiHamburgerMenu />
       </label>
     </div>
-    <div class="drawer-side ">
+    <div className="drawer-side ">
       <label
         for="my-drawer-2"
         aria-label="close sidebar"
-        class="drawer-overlay"
+        className="drawer-overlay"
       ></label>
-      <ul class="menu bg-base-300 text-base-content h-full w-80 p-10 gap-10 text-2xl">
+      <ul className="menu bg-base-300 text-base-content h-full w-80 p-10 gap-10 text-2xl">
         <li>
           <Link to="/feed"><TbCardsFilled /> Explore</Link>
         </li>
