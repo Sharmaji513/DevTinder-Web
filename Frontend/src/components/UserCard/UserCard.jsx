@@ -1,11 +1,11 @@
 import React from "react";
 
-const UserCard = ({ user }) => {
-  const { firstName, lastName, photoUrl, age, skills, gender, about } = user;
+const UserCard = ({ user  }) => {
+  const {firstName, lastName, photoUrl, age, skills, gender, about } = user;
   console.log(user);
   
-
-
+  
+  
   return (
     <div className="flex justify-center items-center min-h-screen ">
       <div className="card w-screen  bottom-0 md:w-[25vw] h-screen md:h-[38vw]  rounded-2xl shadow-2xl relative overflow-hidden bg-base-300 ">

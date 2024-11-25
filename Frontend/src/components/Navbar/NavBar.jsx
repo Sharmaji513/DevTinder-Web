@@ -22,7 +22,7 @@ const NavBar = () => {
   };
 
   const user = useSelector((store) => store.user);
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="navbar bg-base-300 px-8 fixed z-10  ">
