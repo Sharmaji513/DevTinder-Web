@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../../utils/requestSlice";
+import { addRequests, removeRequest } from "../../utils/requestSlice";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
@@ -13,12 +13,18 @@ const Requests = () => {
   console.log(requests);
 
   const connectionRequest = async () => {
-    const res = await axios.get(BASE_URL + "user/requests/received", {
-      withCredentials: true,
-    });
-    console.log(res);
+    const res = await axios.get(BASE_URL + "user/requests/received", {withCredentials: true,});
+    // console.log(res);
     dispatch(addRequests(res.data.data));
   };
+
+
+  const reviewRequest = async(status , _id)=>{
+    const res = await axios.post(BASE_URL +"request/review/" + status + "/" + _id , {}, { withCredentials: true }) 
+    dispatch(removeRequest(_id));
+    // console.log(res);
+    
+  }
 
 
   useEffect(() => {
@@ -33,8 +39,8 @@ const Requests = () => {
       </div>
 
       {/* Notifications Section */}
-      <div className="w-full md:w-3/4">
-        <h1 className="text-2xl mt-16 font-bold text-center text-white mb-8">
+      <div className="w-full md:w-3/4 relative ">
+        <h1 className="text-2xl mt-16 font-bold text-center text-white mb-8 ">
           Pending Requests
         </h1>
         {requests?.length > 0 ? (
@@ -50,7 +56,7 @@ const Requests = () => {
 
             return (
               <div
-                key={request.id}
+                key={request._id}
                 className="flex flex-col md:flex-row items-center justify-between gap-6 w-full max-w-4xl mx-auto p-6 rounded-lg bg-base-200 shadow-md hover:shadow-xl transition-shadow duration-300 mb-6"
               >
               
@@ -73,12 +79,16 @@ const Requests = () => {
 
                 {/* Actions */}
                 <div className="flex gap-4">
-                <Link  className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-800 transition duration-200 cursor-pointer">
-                  Interested
-                </Link>
-                <Link className="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-800 transition duration-200 cursor-pointer">
-                  Ignore
-                </Link>
+                <button 
+                 onClick={() => reviewRequest("accepted", request._id)}  
+                 className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 cursor-pointer">
+                 Accept
+                </button>
+                <button 
+                  onClick={() => reviewRequest("rejected", request._id)} 
+                 className="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-200 cursor-pointer">
+                  Reject
+                </button>
                 </div>
 
               </div>
