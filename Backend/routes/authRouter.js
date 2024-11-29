@@ -12,7 +12,7 @@ module.exports.SECRET_KEY = SECRET_KEY;
 // Signup Route
 authRouter.post("/user/signup", validateSignUpData, async (req, res) => {
   try {
-    const { firstName, lastName, emailId, password } = req.body;
+    const { firstName, lastName, emailId, password ,age , gender } = req.body;
 
     // Encrypt the password
     const passwordHash = await bcrypt.hash(password, 10);
@@ -23,6 +23,9 @@ authRouter.post("/user/signup", validateSignUpData, async (req, res) => {
       lastName,
       emailId,
       password: passwordHash,
+      age,
+      gender
+     
     });
 
     const savedUser = await user.save();

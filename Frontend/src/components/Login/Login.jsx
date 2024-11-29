@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../../utils/constants"; // Ensure BASE_URL is imported correctly
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,8 @@ const Login = () => {
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  const [emailId, setEmailId] = useState("dhoni@gmail.com");
-  const [password, setPassword] = useState("Dhoni@123456");
+  const [emailId, setEmailId] = useState("sachin@gmail.com");
+  const [password, setPassword] = useState("Sachin@123456");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -19,32 +19,34 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${BASE_URL}/user/login`,
+        `${BASE_URL}user/login`, // Use BASE_URL here
         { emailId, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data));
-      navigate("/feed");
+      dispatch(addUser(res.data)); // Add user data to Redux store
+      navigate("/feed"); // Navigate to feed page after successful login
     } catch (err) {
       setErrorMessage(err?.response?.data?.message || "Something went wrong!");
       console.error(err);
     }
   };
 
+  // Handle sign-up form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${BASE_URL}/user/signup`,
+        `${BASE_URL}user/signup`, // Use BASE_URL here
         { emailId, password, firstName, lastName, age, gender },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data));
-      navigate("/feed");
+      dispatch(addUser(res.data)); // Add user data to Redux store
+      navigate("/profile"); // Navigate to profile page after successful signup
     } catch (err) {
       setErrorMessage(err?.response?.data?.message || "Something went wrong!");
       console.error(err);
@@ -104,9 +106,9 @@ const Login = () => {
                       className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                     >
                       <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Others</option>
                     </select>
                   </div>
 

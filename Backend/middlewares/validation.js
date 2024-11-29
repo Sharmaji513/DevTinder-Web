@@ -1,17 +1,35 @@
-
 const validator = require("validator");
 
+// Middleware for validating sign-up data
 const validateSignUpData = (req, res, next) => {
-  const { firstName, lastName, emailId, password } = req.body;
+  const { firstName, lastName, emailId, password, age, gender } = req.body;
 
   if (!firstName || !lastName) {
+    console.log("Validation Error: Name is invalid.");
     return res.status(400).json({ message: "Name is not valid!" });
-  } else if (!validator.isEmail(emailId)) {
+  }
+
+  if (!validator.isEmail(emailId)) {
+    console.log("Validation Error: Email is invalid.");
     return res.status(400).json({ message: "Email is not valid!" });
-  } else if (!validator.isStrongPassword(password)) {
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    console.log("Validation Error: Password is weak.");
     return res.status(400).json({ message: "Please enter a strong password!" });
   }
-  
+
+  if (!age || isNaN(age) || age < 18 || age > 100) {
+    console.log("Validation Error: Age is invalid.");
+    return res.status(400).json({ message: "Age must be a number between 18 and 100!" });
+  }
+
+  const validGenders = ["male", "female", "other"];
+  if (!gender || !validGenders.includes(gender.toLowerCase())) {
+    console.log("Validation Error: Gender is invalid.");
+    return res.status(400).json({ message: `Gender must be one of ${validGenders.join(", ")}!` });
+  }
+
   // Proceed to the next middleware or route handler if validation is successful
   next();
 };
@@ -34,7 +52,9 @@ const vailidateEditProfileData = (req) => {
   return isEditAllowed;
 
 }
+
+// Export the functions
 module.exports = {
   validateSignUpData,
-  vailidateEditProfileData
-}; 
+  vailidateEditProfileData,
+};

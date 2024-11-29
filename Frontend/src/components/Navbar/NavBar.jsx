@@ -1,5 +1,4 @@
 import React from "react";
-import Profile from "../../pages/Edit Profile/Profile";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
@@ -7,6 +6,9 @@ import { removeUser } from "../../utils/userSlice";
 import axios from "axios";
 
 const NavBar = () => {
+  const user = useSelector((store) => store?.user);
+
+  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,8 +23,7 @@ const NavBar = () => {
     }
   };
 
-  const user = useSelector((store) => store.user);
-  // console.log(user);
+
 
   return (
     <div className="navbar bg-base-300 px-8 fixed z-10  ">
@@ -41,7 +42,7 @@ const NavBar = () => {
 
         {user && (
           <div className="form-control">
-            Welcome , {user?.firstName}
+            Welcome , {user.firstName ||  user.data.firstName} 
           </div>
         )}
       </div>
@@ -54,7 +55,7 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src={user?.photoUrl} />
+                <img alt="Tailwind CSS Navbar component" src={user.photoUrl || user.data.photoUrl} />
               </div>
             </div>
             <ul

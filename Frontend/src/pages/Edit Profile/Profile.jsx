@@ -4,7 +4,9 @@ import EditProfile from "./EditProfile";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store?.user);
+  console.log(user);
+  
   return (
     <div className="flex gap-[5vw] min-h-screen">
       {/* Sidebar Section */}

@@ -7,15 +7,17 @@ import { BASE_URL } from "../../utils/constants";
 import { addFeed } from "../../utils/feedSlice";
 
 const Feed = () => {
-  const feed = useSelector((store)=> store.feed)
+  const feed = useSelector((store)=> store?.feed)
   const dispatch = useDispatch();
   console.log(feed);
   
 
   const getFeed = async()=>{
-    if (feed) return;
+   
     try {
       const res = await axios.get(BASE_URL + 'feed' , {withCredentials: true});
+      console.log(res);
+      
       dispatch(addFeed(res?.data?.data))
     } catch (error) {
       console.log(error);
@@ -31,10 +33,15 @@ const Feed = () => {
     <div className="flex gap-[45vw] ">
     <div>
       <Sidebar/>
-    </div> {
-     feed && <div className="mt-5">
-        <UserCard user={feed[0]} />
-      </div>
+    </div>
+    
+     {
+     feed?.length> 0 ? ( <div className="mt-5">
+        <UserCard user={feed[4]} />
+      </div>) :
+      (
+        <h2  className="text-grey text-xl relative top-52  ">No Feed Found</h2>
+      )
 
     }
  
