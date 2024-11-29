@@ -9,12 +9,12 @@ import { addConnections } from "../../utils/connectionSlice";
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
+  // console.log(connections); //testing log
+  
 
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/connections", {
-        withCredentials: true,
-      });
+      const res = await axios.get(BASE_URL + "/user/connections", { withCredentials: true});
       dispatch(addConnections(res.data.data));
     } catch (err) {
       console.error(err);
@@ -33,24 +33,21 @@ const Connections = () => {
 
       {/* Main Content */}
       <div className="w-full text-center my-20">
-        <h1 className="font-bold text-white text-3xl">Connections</h1>
+            <h1 className="text-bold text-white text-3xl">Connections</h1>
 
+       
         {connections?.length > 0 ? (
-          connections.map((connection, index) => {
-            if (!connection) return   <p className="text-center mt-5 text-gray-500">No connection found.</p>
-
-            const { firstName, lastName, photoUrl, age, gender, about } = connection;
-
+          connections.map((connection) => {
+            const { firstName, lastName, photoUrl, age, gender, about } =
+            connection;
+            
             return (
-              <div
-              key={index}
-              className="flex flex-col md:flex-row items-center justify-between gap-6 w-full max-w-4xl mx-auto p-6 rounded-lg bg-base-200 shadow-md hover:shadow-xl transition-shadow duration-300 mb-6"
-            >
+              <div  className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto" >
                 <div>
                   <img
                     alt="photo"
                     className="w-20 h-20 rounded-full"
-                    src={photoUrl || "/default-avatar.png"} // Provide a default image if photoUrl is missing
+                    src={photoUrl}
                   />
                 </div>
                 <div className="text-left mx-4">
@@ -64,7 +61,7 @@ const Connections = () => {
             );
           })
         ) : (
-          <p className="text-center mt-5 text-gray-500">No connection found.</p>
+          <h2 className="text-grey text-xl relative top-52 ">No Connections Found</h2>
         )}
       </div>
     </div>

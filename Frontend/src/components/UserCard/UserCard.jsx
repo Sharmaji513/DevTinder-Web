@@ -1,14 +1,26 @@
 import React from "react";
+import { BASE_URL } from "../../utils/constants";
+import axios from "axios";
+import { removeFeed } from "../../utils/feedSlice";
+import { useDispatch } from "react-redux";
 
 
 const UserCard = ({user}) => {
   
-  const {firstName, lastName, photoUrl, age, skills, gender, about } = user || "";
+  const { _id,firstName, lastName, photoUrl, age, skills, gender, about } = user || "";
   // console.log(user);
   
+  const dispatch = useDispatch();
+
+  const handleSendConnectionRequest = async(status , userId)=>{
+
+    const res = await axios.post(BASE_URL +"request/send/" + status + "/" + userId  ,   {},{ withCredentials: true })
+    // console.log(res);
+    dispatch(removeFeed(userId))
+    
+  }
   
-  
-  return (
+  return user && (
  
     <div className="flex justify-center items-center min-h-screen ">
       <div className="card w-screen  bottom-0 md:w-[25vw] h-screen md:h-[38vw]  rounded-2xl shadow-2xl relative overflow-hidden bg-base-300 ">
@@ -39,10 +51,10 @@ const UserCard = ({user}) => {
             </div>
           </div>
           <div className="absolute bottom-50 left-1/2 transform -translate-x-1/2 flex gap-10">
-            <div className="text-center flex items-center justify-center w-16 h-16 text-3xl text-black rounded-full bg-white shadow-xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] hover:scale-110 transition-transform">
+            <div onClick={()=> handleSendConnectionRequest('ignored' , _id)} className="text-center cursor-pointer flex items-center justify-center w-16 h-16 text-3xl text-black rounded-full bg-white shadow-xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] hover:scale-110 transition-transform">
               ❌
             </div>
-            <div className="text-center flex items-center justify-center w-16 h-16 text-3xl text-black rounded-full bg-white shadow-xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] hover:scale-110 transition-transform">
+            <div onClick={()=> handleSendConnectionRequest('interested' , _id)} className="text-center cursor-pointer flex items-center justify-center w-16 h-16 text-3xl text-black rounded-full bg-white shadow-xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] hover:scale-110 transition-transform">
               💙
             </div>
           </div>

@@ -29,22 +29,26 @@ const Feed = () => {
     getFeed();
   },[])
 
+  if (feed.length < 0 ) return "no feed";
   return (
     <div className="flex gap-[45vw] ">
     <div>
       <Sidebar/>
     </div>
     
+    <div>
      {
      feed?.length> 0 ? ( <div className="mt-5">
-        <UserCard user={feed[4]} />
+        <UserCard user={feed[0]} />
       </div>) :
       (
-        <h2  className="text-grey text-xl relative top-52  ">No Feed Found</h2>
+        <h2  className="text-grey text-xl relative  mt-60 ml-40">No Feed Found</h2>
       )
 
     }
  
+
+    </div>
     </div>
   );
 };
