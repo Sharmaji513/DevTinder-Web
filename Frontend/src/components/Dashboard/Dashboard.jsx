@@ -4,7 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 
 const Dashboard = () => {
   return (
-    <div className="flex  gap-[20vw]">
+    <div className="flex ">
       <div>
         <Sidebar />
       </div>

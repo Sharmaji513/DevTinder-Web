@@ -1,8 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const userData = useSelector((store) => store.user);
+  // const fetchUser = async () => {
+  //   if (userData) return;
+  //   try {
+  //     const res = await axios.get(BASE_URL + "profile/view", {
+  //       withCredentials: true,
+  //     });
+  //     dispatch(addUser(res.data));
+  //   } catch (err) {
+  //     if (err.status === 401) {
+  //       navigate("/login");
+  //     }
+  //     console.error(err);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
+
+
   return (
     <div class="bg-base-300">
       <header class=" ">
@@ -118,8 +142,8 @@ const Home = () => {
                 Swipe into the world of developers.
               </p>
 
-              <a
-                href="#"
+              <Link
+               to= '/login'
                 title=""
                 class="inline-flex items-center px-6 py-4 mt-8 font-semibold text-black transition-all duration-200 bg-yellow-300 rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
                 role="button"
@@ -139,7 +163,7 @@ const Home = () => {
                     d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-              </a>
+              </Link>
 
               <p class="mt-5 text-zinc-200">
                 Already joined us?{" "}
