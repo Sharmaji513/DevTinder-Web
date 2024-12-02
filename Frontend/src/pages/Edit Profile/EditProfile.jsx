@@ -51,7 +51,7 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center my-24">
+      <div className="relative flex justify-center my-24 ml-[80%]">
         {/* Edit Profile Form */}
         <div className="card bg-base-300 md:w-[40vw] w-full shadow-xl mx-10">
           <div className="card-body">

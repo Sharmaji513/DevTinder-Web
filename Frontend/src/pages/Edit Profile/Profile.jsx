@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div className="flex gap-[5vw] min-h-screen">
       {/* Sidebar Section */}
-      <div className="w-1/5 shadow-lg">
+      <div className="w-1/5 shadow-lg fixed">
         <Sidebar />
       </div>
 

@@ -11,6 +11,7 @@ import Connections from "./pages/Connections/Connections";
 import Requests from "./pages/Notifications/Requests";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home";
+import Views from "./pages/Views/View";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/view" element={<Views/>} />
             </Route>
           </Routes>
         </BrowserRouter>

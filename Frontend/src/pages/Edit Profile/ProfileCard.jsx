@@ -9,7 +9,7 @@ const ProfileCard = ({user}) => {
     <div className="max-w-xs">
     <div className="bg-base-200 shadow-xl rounded-lg py-3 md:w-[20vw]  ">
         <div className="photo-wrapper p-2">
-            <img className="w-32 h-32 rounded-full mx-auto" src={photoUrl} alt="img"/>
+            <img className="w-32 h-32 rounded-full mx-auto object-cover" src={photoUrl} alt="img"/>
         </div>
         <div className="p-2">
             <h3 className="text-center text-xl text-white font-medium leading-8">{firstName + " " + lastName}</h3>
