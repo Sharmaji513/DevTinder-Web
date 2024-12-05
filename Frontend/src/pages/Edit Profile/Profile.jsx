@@ -8,7 +8,7 @@ const Profile = () => {
   console.log(user);
   
   return (
-    <div className="flex gap-[5vw] min-h-screen">
+    <div className="flex gap-[5vw] min-h-screen ">
       {/* Sidebar Section */}
       <div className="w-1/5 shadow-lg fixed">
         <Sidebar />
@@ -16,7 +16,7 @@ const Profile = () => {
 
       {/* Profile Content */}
       {user && (
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <EditProfile user={user} />
       </div>
     )}
