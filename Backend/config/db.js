@@ -7,6 +7,9 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGO_URL , {
       useUnifiedTopology: true,
     });
+
+    await mongoose.connect(process.env.MONGO_URL , { useUnifiedTopology: true,});
+
     console.log("MongoDB connected");
   
   } catch (error) {

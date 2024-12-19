@@ -11,9 +11,24 @@ const profileRouter = require("./routes/profileRouter");
 const requestRouter = require("./routes/requestRouter");
 const userRouter = require("./routes/userRouter");
 
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5174",
+      "http://localhost:5173",
+      "https://devtinder-web.netlify.app",
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
+
 
 // Middleware
 app.use(cors());
