@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${BASE_URL}user/login`, // Use BASE_URL here
+        `${BASE_URL}/user/login`, // Use BASE_URL here
         { emailId, password },
         { withCredentials: true }
       );
