@@ -1,30 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
-import { useDispatch, useSelector } from "react-redux";
+
 
 const Home = () => {
-
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const userData = useSelector((store) => store.user);
-  // const fetchUser = async () => {
-  //   if (userData) return;
-  //   try {
-  //     const res = await axios.get(BASE_URL + "profile/view", {
-  //       withCredentials: true,
-  //     });
-  //     dispatch(addUser(res.data));
-  //   } catch (err) {
-  //     if (err.status === 401) {
-  //       navigate("/login");
-  //     }
-  //     console.error(err);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
 
 
   return (

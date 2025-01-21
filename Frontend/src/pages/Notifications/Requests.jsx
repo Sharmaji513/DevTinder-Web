@@ -14,14 +14,14 @@ const Requests = () => {
 
   //show all connections
   const connectionRequest = async () => {
-    const res = await axios.get(BASE_URL + "user/requests/received", {withCredentials: true,});
+    const res = await axios.get(BASE_URL + "/api/v1/user/requests/received", {withCredentials: true,});
     // console.log(res);
     dispatch(addRequests(res.data.data));
   };
 
   //accept or reject the  pending request 
   const reviewRequest = async(status , _id)=>{
-    const res = await axios.post(BASE_URL +"request/review/" + status + "/" + _id , {}, { withCredentials: true }) 
+    const res = await axios.post(BASE_URL +"/api/v1/request/review/" + status + "/" + _id , {}, { withCredentials: true }) 
     dispatch(removeRequest(_id));
     // console.log(res);
     

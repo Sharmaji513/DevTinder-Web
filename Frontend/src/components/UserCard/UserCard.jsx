@@ -14,7 +14,7 @@ const UserCard = ({user}) => {
 
   const handleSendConnectionRequest = async(status , userId)=>{
 
-    const res = await axios.post(BASE_URL +"request/send/" + status + "/" + userId  ,   {},{ withCredentials: true })
+    const res = await axios.post(BASE_URL +"/api/v1//request/send/" + status + "/" + userId  ,   {},{ withCredentials: true })
     // console.log(res);
     dispatch(removeFeed(userId))
     

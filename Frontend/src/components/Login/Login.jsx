@@ -23,13 +23,15 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // console.log( `${BASE_URL}/api/v1/user/login`);
+      
       const res = await axios.post(
-        `${BASE_URL}user/login`, // Use BASE_URL here
+        `${BASE_URL}/api/v1/user/login`, 
         { emailId, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data)); // Add user data to Redux store
-      navigate("/feed"); // Navigate to feed page after successful login
+      dispatch(addUser(res.data)); 
+      navigate("/feed"); 
     } catch (err) {
       setErrorMessage(err?.response?.data?.message || "Something went wrong!");
       console.error(err);
@@ -41,12 +43,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${BASE_URL}user/signup`, // Use BASE_URL here
+        `${BASE_URL}/api/v1/user/signup`, 
         { emailId, password, firstName, lastName, age, gender },
         { withCredentials: true }
       );
       dispatch(addUser(res.data)); // Add user data to Redux store
-      navigate("/profile"); // Navigate to profile page after successful signup
+      navigate("/profile"); 
     } catch (err) {
       setErrorMessage(err?.response?.data?.message || "Something went wrong!");
       console.error(err);
