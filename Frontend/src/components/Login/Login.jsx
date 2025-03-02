@@ -58,7 +58,7 @@ const Login = () => {
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full flex-col md:w-1/2 bg-base-200">
-        <div className="lg:w-[28rem] mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-16 mt-6">
+        <div className="lg:w-[28rem] mx-auto my-auto flex flex-col justify-center pt-16 md:justify-start md:px-6 md:pt-16 mt-6">
           <div>
             {isLoginForm ? (
               <p className="text-left text-3xl font-bold">Welcome 🙏, DevTinder</p>
