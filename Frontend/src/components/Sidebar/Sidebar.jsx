@@ -1,14 +1,16 @@
+// src/components/Sidebar/Sidebar.jsx
 import React, { useState } from "react";
 import { TbCardsFilled } from "react-icons/tb";
 import { FaUsers, FaUserEdit, FaEye } from "react-icons/fa";
 import { MdOutlineNotifications } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineMessage } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { SubscriptionCard } from "../SubscriptionCard/SubscriptionCard";
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -19,7 +21,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="absolute drawer lg:drawer-open  inset-0 mt-16 h-full  ">
+    <div className="absolute drawer lg:drawer-open inset-0 mt-16 h-full lg:fixed">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className={`drawer-content flex flex-col items-center justify-center ${isModalOpen ? "blur-sm" : ""}`}>
         <label
@@ -35,47 +37,43 @@ const Sidebar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-300 text-base-content h-full w-80 p-10 gap-10 text-2xl">
+        <ul className="menu bg-base-300 text-base-content h-full w-80 p-10 gap-5 text-xl">
           <li>
-            <Link to="/feed">
+            <Link to="/feed" className={location.pathname === "/feed" ? "text-blue-600" : ""}>
               <TbCardsFilled /> Explore
             </Link>
           </li>
           <li>
-            <Link to="/connections">
+            <Link to="/connections" className={location.pathname === "/connections" ? "text-blue-600" : ""}>
               <FaUsers /> Connections
             </Link>
           </li>
           <li>
-            <Link to="/requests">
+            <Link to="/requests" className={location.pathname === "/requests" ? "text-blue-600" : ""}>
               <MdOutlineNotifications /> Notifications
             </Link>
           </li>
           <li>
-            <button onClick={openModal} className="flex items-center gap-2">
+            <button onClick={openModal} className={location.pathname === "/view" ? "text-blue-600" : ""}>
               <FaEye /> Views
             </button>
           </li>
           <li>
-            <button onClick={openModal} className="flex items-center gap-2">
-            <AiOutlineMessage /> Messages
-            </button>
+            <Link to="/messages" className={location.pathname === "/messages" ? "text-blue-600" : ""}>
+              <AiOutlineMessage /> Messages
+            </Link>
           </li>
           <li>
-            <Link to="/profile">
+            <Link to="/profile" className={location.pathname === "/profile" ? "text-blue-600" : ""}>
               <FaUserEdit /> Profile
             </Link>
           </li>
         </ul>
       </div>
 
-      {/* Modal and Overlay */}
       {isModalOpen && (
         <>
-          {/* Background Blur Overlay */}
           <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-10"></div>
-
-          {/* Modal Content */}
           <div className="fixed inset-0 flex items-center justify-center z-20">
             <dialog
               id="subscription_modal"

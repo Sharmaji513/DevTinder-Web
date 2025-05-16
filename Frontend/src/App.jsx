@@ -12,6 +12,7 @@ import Requests from "./pages/Notifications/Requests";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home";
 import Views from "./pages/Views/View";
+import Message from "./pages/Message/Message";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/view" element={<Views/>} />
+              <Route path="/messages" element={<Message/>} />
             </Route>
           </Routes>
         </BrowserRouter>

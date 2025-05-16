@@ -3,7 +3,7 @@ import { FaCheck } from "react-icons/fa";
 export const SubscriptionCard = () => (
  
   
-    <div className="shadow-md rounded-lg p-6 relative z-10">
+    <div className="shadow-md rounded-lg p-6 relative  h-full z-10">
       <h3 className="text-lg text-blue-500 font-bold mb-2"><span className="text-3xl text-yellow-300">DevTinder+</span></h3>
       <p className="text-green-500 mb-4 text-sm">
         Unlock exclusive features with our premium subscription plan!

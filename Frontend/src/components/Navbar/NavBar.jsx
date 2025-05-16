@@ -1,3 +1,4 @@
+// components/NavBar/NavBar.jsx
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +50,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <span className="text-2xl">🦸🏻</span>
-          <span className="text-2xl font-mono text-blue-600  sm:inline ">
+          <span className="text-2xl font-mono text-blue-600 sm:inline">
             tinderDev
           </span>
         </Link>
@@ -154,8 +155,8 @@ const NavBar = () => {
 
         {/* Mobile Navigation Menu (Hamburger) */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 flex justify-end w-full rounded-b-xl">
-            <ul className="flex flex-col p-4 ">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-base-300 rounded-b-xl">
+            <ul className="flex flex-col p-4 space-y-3">
               {!user ? (
                 <li>
                   <Link
@@ -169,14 +170,69 @@ const NavBar = () => {
                 </li>
               ) : (
                 <>
-                 
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className={`flex items-center space-x-3 py-3 px-4 rounded-lg ${
+                        location.pathname === "/dashboard"
+                          ? "text-blue-600 bg-blue-50"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      <FaTachometerAlt size={24} />
+                      <span className="text-lg font-medium">Dashboard</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/connections"
+                      className={`flex items-center space-x-3 py-3 px-4 rounded-lg ${
+                        location.pathname === "/connections"
+                          ? "text-blue-600 bg-blue-50"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      <FaUsers size={24} />
+                      <span className="text-lg font-medium">Connections</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/requests"
+                      className={`flex items-center space-x-3 py-3 px-4 rounded-lg ${
+                        location.pathname === "/requests"
+                          ? "text-blue-600 bg-blue-50"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      <FaBell size={24} />
+                      <span className="text-lg font-medium">Notifications</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/messages"
+                      className={`flex items-center space-x-3 py-3 px-4 rounded-lg ${
+                        location.pathname === "/messages"
+                          ? "text-blue-600 bg-blue-50"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      <FaEnvelope size={24} />
+                      <span className="text-lg font-medium">Messages</span>
+                    </Link>
+                  </li>
                   <li>
                     <button
                       onClick={() => {
                         handleLogout();
                         toggleMenu();
                       }}
-                      className="flex items-center space-x-3 py-3 px-4 text-white bg-blue-600 hover:bg-blue-50 hover:text-blue-600 rounded-lg "
+                      className="flex items-center space-x-3 py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg w-full"
                     >
                       <FaSignOutAlt size={24} />
                       <span className="text-lg font-medium">Logout</span>
@@ -190,14 +246,14 @@ const NavBar = () => {
 
         {/* Mobile Bottom Navigation Bar */}
         {user && (
-          <div className="fixed bottom-0 left-0 w-full bg-black shadow-lg md:hidden z-50">
+          <div className="fixed bottom-0 left-0 w-full bg-base-300 shadow-lg md:hidden z-50">
             <div className="flex justify-around items-center py-3 px-4">
               <Link
                 to="/feed"
                 className={`flex flex-col items-center p-2 rounded-full ${
-                  location.pathname === "/explore"
-                    ? " text-blue-600"
-                    : "text-gray-500  hover:text-blue-700"
+                  location.pathname === "/feed"
+                    ? "text-blue-600"
+                    : "text-gray-500 hover:text-blue-600"
                 }`}
               >
                 <FaCompass
@@ -210,8 +266,8 @@ const NavBar = () => {
                 to="/connections"
                 className={`flex flex-col items-center p-2 rounded-full ${
                   location.pathname === "/connections"
-                    ? " text-blue-600"
-                    : "text-gray-500  hover:text-blue-700"
+                    ? "text-blue-600"
+                    : "text-gray-500 hover:text-blue-600"
                 }`}
               >
                 <FaUsers
@@ -224,8 +280,8 @@ const NavBar = () => {
                 to="/requests"
                 className={`flex flex-col items-center p-2 rounded-full ${
                   location.pathname === "/requests"
-                    ? " text-blue-600"
-                    : "text-gray-500 hover:bg-blue-50 hover:text-blue-700"
+                    ? "text-blue-600"
+                    : "text-gray-500 hover:text-blue-600"
                 }`}
               >
                 <FaBell
@@ -238,8 +294,8 @@ const NavBar = () => {
                 to="/messages"
                 className={`flex flex-col items-center p-2 rounded-full ${
                   location.pathname === "/messages"
-                    ? " text-blue-600"
-                    : "text-gray-500 hover:bg-blue-50 hover:text-blue-700"
+                    ? "text-blue-600"
+                    : "text-gray-500 hover:text-blue-600"
                 }`}
               >
                 <TbMessageChatbotFilled
@@ -252,8 +308,8 @@ const NavBar = () => {
                 to="/profile"
                 className={`flex flex-col items-center p-2 rounded-full ${
                   location.pathname === "/profile"
-                    ? " text-blue-600"
-                    : "text-gray-500 hover:bg-blue-50 hover:text-blue-700"
+                    ? "text-blue-600"
+                    : "text-gray-500 hover:text-blue-600"
                 }`}
               >
                 <FaUserEdit
@@ -262,14 +318,6 @@ const NavBar = () => {
                 />
                 <span className="text-xs mt-1">Profile</span>
               </Link>
-              
-              {/* <button
-                onClick={handleLogout}
-                className="flex flex-col items-center p-2 rounded-full text-gray-500 hover:bg-blue-50 hover:text-blue-700"
-              >
-                <FaSignOutAlt size={26} className="text-gray-500" />
-                <span className="text-xs mt-1">Logout</span>
-              </button> */}
             </div>
           </div>
         )}

@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { addConnections } from "../../utils/connectionSlice";
+import { useNavigate } from "react-router-dom";
 
 const Connections = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const connections = useSelector((store) => store.connections);
 
   const fetchConnections = async () => {
@@ -20,9 +22,19 @@ const Connections = () => {
     }
   };
 
-  const handleMessage = (connectionId) => {
-    console.log(`Initiate messaging with connection ID: ${connectionId}`);
-    // Replace with actual messaging logic (e.g., navigate to chat)
+  const handleMessage = async (connectionId) => {
+    try {
+      // Check if a conversation exists or create a new one
+      const res = await axios.post(
+        `${BASE_URL}/api/v1/messages/start`,
+        { recipientId: connectionId },
+        { withCredentials: true }
+      );
+      const conversationId = res.data.data.conversationId;
+      navigate(`/messages?conversationId=${conversationId}`);
+    } catch (error) {
+      console.error("Error starting conversation:", error);
+    }
   };
 
   useEffect(() => {
@@ -30,18 +42,14 @@ const Connections = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-base-200">
-      {/* Sidebar */}
+    <div className="flex flex-col md:flex-row min-h-screen bg-base-200" >
       <div className="w-full md:w-64 md:fixed md:h-full">
         <Sidebar />
       </div>
-
-      {/* Main Content */}
       <div className="flex-1 p-3 md:p-4 md:ml-64">
         <h1 className="text-xl md:text-3xl font-bold text-white text-center my-4 md:my-6">
           Connections
         </h1>
-
         {connections?.length > 0 ? (
           <div className="grid gap-3 md:gap-4 max-w-3xl mx-auto">
             {connections.map((connection, index) => {
